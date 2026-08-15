@@ -1,0 +1,14 @@
+# macOS
+.DS_Store
+
+# Original photo libraries (~129 MB) — source material, not used by the site.
+# The site serves the optimised copies in images/ instead.
+# (trailing-* forms cover folder names that end in a space)
+BOUCLE TEXTURES and prints*/
+CLASSIC JACQUARD*/
+DESIGNER CURTAINS*/
+MODERN JACQUARDS*/
+PREMIUM CURTAINS*/
+
+# Local editor / tooling
+.claude/

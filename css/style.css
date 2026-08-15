@@ -1,0 +1,309 @@
+/* ==========================================================================
+   ABN Textiles India Pvt Ltd — stylesheet
+   1. Tokens        2. Base       3. Layout helpers   4. Header / nav
+   5. Hero          6. USP strip  7. About            8. Collections
+   9. Jacquard     10. Capabilities  11. Gallery      12. Locations
+  13. Footer       14. Motion     15. Responsive
+   ========================================================================== */
+
+/* 1. TOKENS ---------------------------------------------------------------- */
+:root{
+  /* surfaces */
+  --base:      #FBFAF7;   /* ivory page ground          */
+  --base-alt:  #F1EFE9;   /* warm tint for alt sections */
+  --deep:      #1E3B32;   /* forest green sections      */
+  --deep-2:    #162C25;   /* darker green — footer      */
+
+  /* ink */
+  --text:      #16211D;
+  --text-soft: #45534D;
+  --muted:     #7C8880;
+  --on-deep:        rgba(255,255,255,.78);
+  --on-deep-muted:  rgba(255,255,255,.52);
+
+  /* accent */
+  --gold:      #B8912F;
+  --gold-soft: #D8B45E;   /* on dark grounds */
+
+  /* lines */
+  --line:      rgba(22,33,29,.14);
+  --line-soft: rgba(22,33,29,.08);
+  --line-deep: rgba(255,255,255,.15);
+
+  /* type */
+  --serif: ui-serif,"New York",Georgia,"Iowan Old Style","Palatino Linotype",serif;
+  --sans:  -apple-system,BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Arial,sans-serif;
+
+  /* metrics */
+  --pad:      clamp(20px,5vw,72px);
+  --maxw:     1280px;
+  --header-h: 82px;
+}
+
+/* 2. BASE ------------------------------------------------------------------ */
+*{ box-sizing:border-box; margin:0; padding:0 }
+html{ scroll-behavior:smooth }
+body{
+  background:var(--base); color:var(--text);
+  font-family:var(--sans); font-size:17px; line-height:1.65;
+  -webkit-font-smoothing:antialiased; overflow-x:hidden;
+}
+img{ max-width:100%; display:block }
+a{ color:inherit; text-decoration:none }
+
+h1,h2,h3{ font-family:var(--serif); font-weight:400; letter-spacing:-.015em; line-height:1.08 }
+h2{ font-size:clamp(30px,4.4vw,52px) }
+h3{ font-size:clamp(21px,2.2vw,27px); line-height:1.2 }
+p{ color:var(--text-soft) }
+
+/* 3. LAYOUT HELPERS -------------------------------------------------------- */
+.wrap{ max-width:var(--maxw); margin:0 auto; padding-inline:var(--pad) }
+
+/* offset anchor targets so the sticky header never covers a heading */
+section[id], div[id]{ scroll-margin-top:calc(var(--header-h) + 16px) }
+
+.eyebrow{
+  font-size:11px; letter-spacing:.22em; text-transform:uppercase;
+  color:var(--muted); font-weight:600;
+}
+.media{ overflow:hidden; background:var(--base-alt) }
+.media img{ width:100%; height:100%; object-fit:cover }
+
+.btn{
+  display:inline-block; padding:15px 32px; font-size:12px;
+  letter-spacing:.15em; text-transform:uppercase;
+  border:1px solid transparent; transition:.25s; cursor:pointer;
+}
+.btn-solid{ background:var(--base); color:var(--text) }
+.btn-solid:hover{ background:var(--gold); color:#fff }
+.btn-ghost{ border-color:rgba(255,255,255,.55); color:#fff }
+.btn-ghost:hover{ background:#fff; color:var(--text) }
+
+.sec-head{
+  display:flex; justify-content:space-between; align-items:flex-end; gap:28px;
+  padding-bottom:26px; border-bottom:1px solid var(--line);
+  margin-bottom:clamp(28px,4vw,48px);
+}
+.sec-head h2{ max-width:18ch; margin-top:14px }
+
+/* 4. HEADER / NAV ---------------------------------------------------------- */
+header{
+  position:sticky; top:0; z-index:60;
+  background:rgba(251,250,247,.88); backdrop-filter:blur(14px);
+  border-bottom:1px solid transparent; transition:border-color .3s;
+}
+header.stuck{ border-bottom-color:var(--line-soft) }
+
+.nav{
+  display:flex; align-items:center; justify-content:space-between;
+  gap:32px; height:var(--header-h);
+}
+/* align-items:flex-start stops the flex column stretching the logo sideways */
+.brand{ display:flex; flex-direction:column; align-items:flex-start; gap:5px }
+.brand img{ width:122px; height:35px; object-fit:contain }
+.brand span{
+  font-size:8.5px; letter-spacing:.26em; text-transform:uppercase; color:var(--muted);
+}
+
+.nav-links{ display:flex; gap:32px; font-size:12.5px; letter-spacing:.1em; text-transform:uppercase }
+.nav-links a{ position:relative; padding-bottom:3px; color:var(--text-soft) }
+.nav-links a::after{
+  content:""; position:absolute; left:0; bottom:0;
+  width:0; height:1px; background:var(--gold); transition:width .3s;
+}
+.nav-links a:hover{ color:var(--text) }
+.nav-links a:hover::after{ width:100% }
+
+.nav-cta{
+  border:1px solid var(--deep); color:var(--deep); padding:11px 22px;
+  font-size:11.5px; letter-spacing:.14em; text-transform:uppercase;
+  white-space:nowrap; transition:.25s;
+}
+.nav-cta:hover{ background:var(--deep); color:var(--base) }
+
+.burger{ display:none; background:none; border:0; font-size:22px; color:var(--text); cursor:pointer; line-height:1 }
+.mobile-menu{ display:none; border-top:1px solid var(--line-soft); padding:8px var(--pad) 22px }
+.mobile-menu.open{ display:block }
+.mobile-menu a{
+  display:block; padding:13px 0; font-size:13px; letter-spacing:.12em;
+  text-transform:uppercase; border-bottom:1px solid var(--line-soft);
+}
+
+/* 5. HERO ------------------------------------------------------------------ */
+.hero{ position:relative; min-height:clamp(580px,88vh,880px); display:flex; align-items:flex-end }
+.hero .media{ position:absolute; inset:0 }
+.hero-scrim{
+  position:absolute; inset:0;
+  background:linear-gradient(180deg,
+    rgba(16,32,26,.46) 0%, rgba(16,32,26,.22) 38%, rgba(16,32,26,.84) 100%);
+}
+.hero-inner{ position:relative; width:100%; padding-block:clamp(48px,7vw,92px); color:#fff }
+/* the hero photo is bright behind this line — shadow keeps it legible */
+.hero-inner .eyebrow{ color:#F0D08A; text-shadow:0 1px 14px rgba(16,32,26,.85), 0 1px 3px rgba(16,32,26,.6) }
+.hero h1{ font-size:clamp(38px,6.2vw,82px); margin:18px 0 22px; max-width:16ch; color:#fff }
+.hero p{ color:rgba(255,255,255,.85); max-width:52ch; font-size:clamp(16px,1.5vw,19px) }
+.hero-actions{ display:flex; flex-wrap:wrap; gap:14px; margin-top:34px }
+
+/* 6. USP STRIP ------------------------------------------------------------- */
+.usp{ background:var(--deep); color:#fff }
+.usp-inner{ display:grid; grid-template-columns:repeat(3,1fr) }
+.usp-item{ padding:32px 16px; text-align:center; border-right:1px solid var(--line-deep) }
+.usp-item:last-child{ border-right:0 }
+.usp-item b{ display:block; font-family:var(--serif); font-size:20px; font-weight:400; color:#fff }
+.usp-item span{
+  font-size:11px; letter-spacing:.16em; text-transform:uppercase;
+  color:var(--on-deep-muted); margin-top:4px; display:block;
+}
+
+/* 7. ABOUT ----------------------------------------------------------------- */
+.about{ padding-block:clamp(64px,9vw,124px) }
+.about-grid{ display:grid; grid-template-columns:1fr 1.2fr; gap:clamp(32px,6vw,86px); align-items:start }
+.about-lede{
+  font-family:var(--serif); font-size:clamp(23px,2.6vw,33px);
+  line-height:1.34; color:var(--text); margin-bottom:24px;
+}
+.about-copy p + p{ margin-top:16px }
+.about-media{ margin-top:clamp(44px,6vw,76px) }
+.about-media .media{ aspect-ratio:21/9 }
+
+/* 8. COLLECTIONS ----------------------------------------------------------- */
+.collections{ padding-block:clamp(56px,7vw,96px) }
+.col-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:clamp(14px,1.6vw,24px) }
+.card .media{ aspect-ratio:3/4 }
+.card .media img{ transition:transform .7s cubic-bezier(.2,.7,.3,1) }
+.card:hover .media img{ transform:scale(1.05) }
+.card h3{ margin-top:18px; font-size:21px }
+.card p{ font-size:14.5px; margin-top:6px; color:var(--muted) }
+
+/* 9. JACQUARD SPECIALITY --------------------------------------------------- */
+.spec{ background:var(--deep); color:#fff; padding-block:clamp(64px,9vw,124px); margin-top:clamp(48px,6vw,88px) }
+.spec h2{ color:#fff }
+.spec .eyebrow{ color:var(--gold-soft) }
+.spec-top{
+  display:grid; grid-template-columns:1fr 1fr; gap:clamp(28px,5vw,72px);
+  align-items:end; margin-bottom:clamp(32px,5vw,56px);
+}
+.spec-top p{ color:var(--on-deep) }
+.spec-grid{ display:grid; grid-template-columns:1fr 1.55fr; gap:clamp(14px,1.6vw,22px) }
+.spec-grid .media{ background:#26433A }
+.spec-a{ aspect-ratio:3/4 }
+.spec-b{ aspect-ratio:5/3; align-self:end }
+.spec-cap{
+  margin-top:12px; font-size:11px; letter-spacing:.16em;
+  text-transform:uppercase; color:var(--on-deep-muted);
+}
+
+/* 10. CAPABILITIES --------------------------------------------------------- */
+.caps{ padding-block:clamp(64px,9vw,110px) }
+.caps-grid{ display:grid; grid-template-columns:repeat(5,1fr); gap:clamp(18px,2.4vw,36px) }
+.cap{ border-top:1px solid var(--line); padding-top:20px }
+.cap .num{ font-family:var(--serif); font-size:14px; color:var(--gold); display:block; margin-bottom:10px }
+.cap h3{ font-size:19px }
+.cap p{ font-size:14.5px; margin-top:8px; color:var(--muted) }
+
+/* 11. GALLERY -------------------------------------------------------------- */
+/* Masonry columns: every photo keeps its own aspect ratio, so nothing is cropped. */
+.gallery{ background:var(--base-alt); padding-block:clamp(64px,9vw,120px) }
+.g-masonry{ column-count:3; column-gap:clamp(12px,1.4vw,20px) }
+.g-item{ break-inside:avoid; margin-bottom:clamp(12px,1.4vw,20px) }
+.g-item .shot{ overflow:hidden; background:var(--base) }
+.g-item img{
+  width:100%; height:auto;              /* whole picture, never cropped */
+  transition:transform .7s cubic-bezier(.2,.7,.3,1);
+}
+.g-item:hover img{ transform:scale(1.04) }
+.g-item figcaption{
+  margin-top:10px; font-size:11px; letter-spacing:.15em;
+  text-transform:uppercase; color:var(--muted);
+}
+
+/* 12. LOCATIONS & CONTACT -------------------------------------------------- */
+.contact{ padding-block:clamp(64px,9vw,120px) }
+.loc-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(20px,2.6vw,36px) }
+.loc{ border-top:2px solid var(--deep); padding-top:22px }
+.loc .tag{ font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--gold); font-weight:600 }
+.loc h3{ margin:10px 0 14px; font-size:23px }
+.loc address{ font-style:normal; color:var(--text-soft); font-size:15.5px; line-height:1.7 }
+.loc dl{ margin-top:18px; display:grid; grid-template-columns:auto 1fr; gap:7px 14px; font-size:15px }
+.loc dt{ font-size:10.5px; letter-spacing:.15em; text-transform:uppercase; color:var(--muted); padding-top:5px }
+.loc dd a:hover{ color:var(--gold) }
+.loc .maplink{
+  display:inline-block; margin-top:20px; font-size:11.5px; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--gold);
+  border-bottom:1px solid var(--gold); padding-bottom:2px;
+}
+
+/* per-location map */
+.loc-map{ margin-top:22px; position:relative; background:var(--base-alt) }
+.map-frame{ position:relative; width:100%; aspect-ratio:4/3; overflow:hidden }
+.map-frame iframe{ position:relative; z-index:1; width:100%; height:100%; border:0; display:block }
+.map-fallback{
+  position:absolute; inset:0; z-index:0;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  gap:6px; text-align:center; padding:24px; color:var(--muted);
+}
+.map-fallback b{ font-family:var(--serif); font-size:19px; font-weight:400; color:var(--text) }
+.map-fallback span{ font-size:12.5px }
+
+.enquiry{
+  margin-top:clamp(44px,6vw,76px); background:var(--deep); color:#fff;
+  padding:clamp(32px,5vw,58px);
+  display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:26px;
+}
+.enquiry h3{ font-size:clamp(24px,2.8vw,34px); max-width:20ch; color:#fff }
+.enquiry p{ margin-top:8px; font-size:15.5px; color:var(--on-deep) }
+.enquiry .btn{ background:var(--gold); color:#fff; border-color:var(--gold) }
+.enquiry .btn:hover{ background:var(--base); color:var(--deep); border-color:var(--base) }
+
+/* 13. FOOTER --------------------------------------------------------------- */
+footer{ background:var(--deep-2); color:var(--on-deep-muted); padding-block:60px 32px; font-size:13.5px }
+.f-top{
+  display:flex; justify-content:space-between; flex-wrap:wrap; gap:36px;
+  padding-bottom:34px; border-bottom:1px solid var(--line-deep);
+}
+.f-brand img{ width:146px; height:42px; object-fit:contain }
+.f-brand span{
+  display:block; margin-top:10px; font-size:9px; letter-spacing:.26em;
+  text-transform:uppercase; color:rgba(255,255,255,.4);
+}
+.f-links{ display:flex; gap:44px; flex-wrap:wrap }
+.f-links a:hover{ color:#fff }
+.f-bot{
+  padding-top:22px; display:flex; justify-content:space-between; flex-wrap:wrap;
+  gap:12px; font-size:12px; color:rgba(255,255,255,.38);
+}
+
+/* 14. MOTION --------------------------------------------------------------- */
+.rv{ opacity:0; transform:translateY(22px); transition:opacity .8s ease, transform .8s cubic-bezier(.2,.7,.3,1) }
+.rv.in{ opacity:1; transform:none }
+
+/* 15. RESPONSIVE ----------------------------------------------------------- */
+@media (max-width:1080px){
+  .caps-grid{ grid-template-columns:repeat(3,1fr); gap:28px }
+  .g-masonry{ column-count:2 }
+}
+@media (max-width:980px){
+  .nav-links,.nav-cta{ display:none }
+  .burger{ display:block }
+  .about-grid,.spec-top,.spec-grid{ grid-template-columns:1fr }
+  .spec-b{ aspect-ratio:16/9 }
+  .col-grid{ grid-template-columns:repeat(2,1fr) }
+  .loc-grid{ grid-template-columns:1fr; gap:0 }
+  .loc{ margin-top:34px }
+  .map-frame{ aspect-ratio:16/9 }
+}
+@media (max-width:600px){
+  .usp-inner{ grid-template-columns:1fr }
+  .usp-item{ border-right:0; border-bottom:1px solid var(--line-deep); padding:22px 0 }
+  .usp-item:last-child{ border-bottom:0 }
+  .caps-grid{ grid-template-columns:1fr }
+  .col-grid{ grid-template-columns:1fr 1fr; gap:12px }
+  .g-masonry{ column-count:1 }
+  .sec-head{ flex-direction:column; align-items:flex-start }
+  .about-media .media{ aspect-ratio:4/3 }
+}
+@media (prefers-reduced-motion:reduce){
+  .rv{ opacity:1; transform:none; transition:none }
+  html{ scroll-behavior:auto }
+  .g-item:hover img,.card:hover .media img{ transform:none }
+}
