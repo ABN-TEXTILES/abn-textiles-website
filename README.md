@@ -75,6 +75,18 @@ block in `index.html`:
 </figure>
 ```
 
+## Hosting
+
+Deployed on Vercel from the `main` branch of
+<https://github.com/ABN-TEXTILES/abn-textiles-website> — every push to `main`
+redeploys automatically. Primary domain: **abntextile.com**.
+
+`vercel.json` sets caching and security headers. Note that `css/` and `js/` are
+served `must-revalidate`, so edits go live immediately, but files in `images/` are
+cached for a day. If you replace a photo **and keep the same filename**, repeat
+visitors may see the old one for up to 24 hours — give the new file a different
+name to avoid that.
+
 ## Adding pages later
 
 `css/style.css` and `js/main.js` are shared, so a new page just needs the same
